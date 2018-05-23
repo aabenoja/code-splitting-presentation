@@ -6,6 +6,7 @@ Vertical Slices Works For Bread, Why Not Our Javascript
 ## Words Of The Day
 * Tree Shaking
 * Dynamic Imports
+* CSS
 * Code Splitting React Components
 
 ---
@@ -60,6 +61,14 @@ enabled
 ## Dynamic Imports
 
 NOTE: Discuss lazy loading modules and how easy it is in webpack
+
+---
+
+## Living With(out) Css
+
+> Does my css need to live with my components?
+
+NOTE: Demo usage of mini-css-extract-plugin
 
 ---
 
