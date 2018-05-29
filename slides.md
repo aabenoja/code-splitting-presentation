@@ -138,6 +138,23 @@ may not work because a module has already been imported earlier.
 <script type="text/javascript" src="/public/scripts/megabundle.someHash.js"></script>
 ```
 
+----
+
+```js
+
+const StyledDiv = styled.div`
+  css
+`
+
+export default function MyComponent(props) {
+  return (
+    <StyledDiv ... >
+      ...
+    </StyledDiv>
+  )
+}
+```
+
 NOTE: In many cases this is fine. In this age of componentization it makes sense for the
 styling to live directly next to its component.
 
@@ -145,7 +162,16 @@ styling to live directly next to its component.
 
 > Does my css need to live with my components?
 
-NOTE: Demo usage of mini-css-extract-plugin
+NOTE: Demo usage of mini-css-extract-plugin. Sometimes it makes sense to simply use  css as it was originally intended.
+
+----
+
+* Cons
+  * Adds complexity to your webpack config
+  * Lose the benefits of having styles live directly next to a component
+* Pros
+  * Javascript is for javascript, so smaller bundle size
+  * A css file can be cached
 
 ---
 
