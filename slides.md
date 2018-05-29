@@ -7,15 +7,13 @@ Vertical Slices Works For Bread, Why Not Our Javascript
 * Tree Shaking
 * Dynamic Imports
 * CSS
-* Code Splitting React Components
+* Code Splitting React Applications
 
 ---
 
 ## Tree Shaking 
 
-----
-
-### I Just Need One Tree, Do I Really Need The Whole Forest
+> I just need one tree, do I really need the whole forest
 
 NOTE: Go over the concept of tree shaking
 
@@ -32,8 +30,11 @@ const includes = require('lodash/includes')
 
 // or
 
-const { includes } from 'lodash'
+const { includes } = require('lodash')
 ```
+
+NOTE: Tree shaking does not automatically determine the best
+import chain. Its only concern is to remove unnecessary exports
 
 ----
 
@@ -44,6 +45,9 @@ const { includes } from 'lodash'
 3. ???
 4. Profit
 
+NOTE: Step 3 is the usage of a tool like uglifyjs to remove the
+resulting dead code
+
 ----
 
 ### Tree Shaking Only Operates On ES2015 IMPORTS/EXPORTS
@@ -52,7 +56,7 @@ const { includes } from 'lodash'
 "modules": false
 ```
 
-NOTE: Show the tree shaking demo in examples/tree shaking with
+NOTE: Show the tree shaking demo in examples/tree-shaking with
 lodash and compare bundle sizes with and without tree shaking
 enabled
 
@@ -60,11 +64,84 @@ enabled
 
 ## Dynamic Imports
 
-NOTE: Discuss lazy loading modules and how easy it is in webpack
+----
+
+```html
+<link type="text/css" rel="stylesheet" href="/cdn.com/bootstrap.css">
+<link type="text/css" rel="stylesheet" href="/public/styles/site.css">
+
+<script type="text/javascript" src="//cdn.com/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.com/jquery-plugin-one.min.js"></script>
+<script type="text/javascript" src="//cdn.com/jquery-plugin-one.two.js"></script>
+<script type="text/javascript" src="//cdn.com/jquery-plugin-one.five.js"></script>
+<script type="text/javascript" src="//cdn.com/jquery-plugin-one.alpha.js"></script>
+<script type="text/javascript" src="//cdn.com/jquery-plugin-one.gamma.js"></script>
+<script type="text/javascript" src="//cdn.com/underscore.min.js></scripts>
+<script type="text/javascript" src="/public/scripts/page.specific.js?v=otherHash"></script>
+```
+
+----
+
+```html
+<link type="text/css" rel="stylesheet" href="/cdn.com/bootstrap.css">
+<link type="text/css" rel="stylesheet" href="/public/styles/site.css">
+
+<script type="text/javascript" src="/public/scripts/vendor.js?v=someHash"></script>
+<script type="text/javascript" src="/public/scripts/page.specific.js?v=otherHash"></script>
+```
+
+----
+
+```html
+<!-- css is loaded into head from the mega bundle -->
+<script type="text/javascript" src="/public/scripts/megabundle.someHash.js"></script>
+```
+
+----
+
+> It's Okay To Procrastinate (your script loading)
+
+----
+
+### Pull in scripts later with import()
+
+```js
+import('/path/to/module')
+  .then(module => {});
+```
+
+NOTE: This is only available in Chrome
+
+----
+
+### Webpack understands import()
+
+NOTE: Show code splitting demo, including how code splitting
+may not work because a module has already been imported earlier.
+
+----
+
+### Caveats
+
+* Be mindful of your `output.publicPath`
+  * If you're using the webpack dev server be sure `devserver.publicPath` is the same as `output.publicPath`
+* Cache busting is still going to affect the primary bundle, not just the intended split
 
 ---
 
 ## Living With(out) Css
+
+----
+
+```html
+<!-- css is loaded into head from the mega bundle -->
+<script type="text/javascript" src="/public/scripts/megabundle.someHash.js"></script>
+```
+
+NOTE: In many cases this is fine. In this age of componentization it makes sense for the
+styling to live directly next to its component.
+
+----
 
 > Does my css need to live with my components?
 
