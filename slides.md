@@ -162,13 +162,25 @@ styling to live directly next to its component.
 
 > Does my css need to live with my components?
 
-NOTE: Demo usage of mini-css-extract-plugin. Sometimes it makes sense to simply use  css as it was originally intended.
+----
+
+> It's okay to use `less` or `sass` in your modules
+
+
+NOTE: Demo usage of mini-css-extract-plugin. Sometimes it makes sense to simply use css over css-in-js
+
+----
+
+### Webpack CSS Modules
+
+NOTE: Call out component in demo using a css module to pull css classes and conditionally apply them
 
 ----
 
 * Cons
   * Adds complexity to your webpack config
   * Lose the benefits of having styles live directly next to a component
+  * CSS Modules are much more rigid than css-in-js libraries
 * Pros
   * Javascript is for javascript, so smaller bundle size
   * A css file can be cached
